@@ -78,6 +78,7 @@ def process_dicoms(files, save_images=False):
             f.seek(0, os.SEEK_END)
             file_size = f.tell()
             f.seek(0, os.SEEK_SET)
+            print(f"Filesize is {file_size // 1024} KB")
 
             while True:
                 try:
@@ -105,5 +106,14 @@ def process_dicoms(files, save_images=False):
                 imgs = np.array(imgs)
                 
                 print(f'Read {len(imgs)} images')
+                if save_images:
+                    if not os.path.exists("outputs/"):
+                        os.makedirs("outputs/")
+                        print("Created outputs directory")
+
+                    print("Saving images to disk...")
+                    for i, img in enumerate(imgs):
+                        cv2.imwrite(f"outputs/{fname}-{i+1:02}.jpg", img)
+                    print("Saved images")
         print()
 
