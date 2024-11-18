@@ -1,0 +1,4 @@
+experiment
+**/*.DCM
+**/*.jpg
+**/__pycache__
